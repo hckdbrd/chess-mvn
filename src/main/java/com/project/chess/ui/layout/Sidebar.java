@@ -1,15 +1,11 @@
-package com.project.chess.view.component;
+package com.project.chess.ui.layout;
 
-import com.project.chess.view.*;
+import com.project.chess.ui.tabs.*;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -19,49 +15,24 @@ public class Sidebar extends VerticalLayout{
 
    public Sidebar() {
       Tabs tabs = buildTabs();
-      HorizontalLayout auth = buildAuth();
 
       add(
          tabs,
-         auth
+         new SidebarAuth()
       );
 
       setHeightFull();
       setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
    }
 
-   private static HorizontalLayout buildAuth() {
-      LoginOverlay loginOverlay = new LoginOverlay();
-      loginOverlay.setTitle("GAMBIT");
-      loginOverlay.setDescription("Chess platform for professionals.");
-
-      Button loginButton = new Button("Log in");
-      Button signUpButton = new Button("Sign Up");
-
-      loginButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-      loginButton.addClickListener(event -> loginOverlay.setOpened(true));
-
-      HorizontalLayout loginBlock = new HorizontalLayout();
-      loginBlock
-         .add(
-            loginButton,
-            signUpButton
-         );
-
-      loginBlock.setWidthFull();
-      loginBlock.setJustifyContentMode(JustifyContentMode.CENTER);
-
-      return loginBlock;
-   }
-
    private Tabs buildTabs() {
       Tabs tabs = new Tabs();
       tabs.add(
-         buildTab(VaadinIcon.GAMEPAD, "Play", PlayView.class),
-         buildTab(VaadinIcon.PUZZLE_PIECE, "Puzzles", PuzzlesView.class),
-         buildTab(VaadinIcon.GROUP, "Social", SocialView.class),
-         buildTab(VaadinIcon.SLIDERS, "Settings", SettingsView.class),
-         buildTab(VaadinIcon.ELLIPSIS_DOTS_H, "More", MoreView.class)
+         buildTab(VaadinIcon.GAMEPAD, "Play", PlayTab.class),
+         buildTab(VaadinIcon.PUZZLE_PIECE, "Puzzles", PuzzlesTab.class),
+         buildTab(VaadinIcon.GROUP, "Social", SocialTab.class),
+         buildTab(VaadinIcon.SLIDERS, "Settings", SettingsTab.class),
+         buildTab(VaadinIcon.ELLIPSIS_DOTS_H, "More", MoreTab.class)
       );
       tabs.setOrientation(Tabs.Orientation.VERTICAL);
 
