@@ -17,4 +17,8 @@ public abstract class AbstractEntity {
    @Id
    @GeneratedValue
    private Integer id;
+
+   public boolean isPersisted() {
+      return id != null;
+   }
 }

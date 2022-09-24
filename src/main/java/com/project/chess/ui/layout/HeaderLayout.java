@@ -5,8 +5,8 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-public class Header extends HorizontalLayout{
-   public Header() {
+public class HeaderLayout extends HorizontalLayout{
+   public HeaderLayout() {
       Image logo = new Image("images/logo.svg", "Gambit logotype");
       logo.getStyle().set("height", "18px");
       add(

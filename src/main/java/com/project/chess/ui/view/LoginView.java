@@ -1,6 +1,5 @@
 package com.project.chess.ui.view;
 
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -14,21 +13,18 @@ import javax.annotation.security.PermitAll;
 @PageTitle("Login")
 @PermitAll
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
-
    private final LoginForm login = new LoginForm();
-
 
    public LoginView() {
       setSizeFull();
-
-      setJustifyContentMode(JustifyContentMode.CENTER);
       setAlignItems(Alignment.CENTER);
+      setJustifyContentMode(JustifyContentMode.CENTER);
+      getStyle().set("background-color", "var(--lumo-contrast-5pct)");
 
       login.setAction("login");
       login.getElement().setAttribute("no-autofocus", "");
 
       add(
-         new H1("Welcome"),
          login
       );
    }

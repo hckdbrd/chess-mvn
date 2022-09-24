@@ -11,14 +11,14 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 
-public class Sidebar extends VerticalLayout{
+public class SidebarLayout extends VerticalLayout{
 
-   public Sidebar() {
+   public SidebarLayout() {
       Tabs tabs = buildTabs();
 
       add(
          tabs,
-         new SidebarAuth()
+         new SidebarAuthLayout()
       );
 
       setHeightFull();
@@ -44,7 +44,6 @@ public class Sidebar extends VerticalLayout{
       RouterLink link = new RouterLink();
       link.add(icon, new Span(viewName));
       link.setRoute(navigationTarget);
-      link.setTabIndex(-1);
 
       return new Tab(link);
    }

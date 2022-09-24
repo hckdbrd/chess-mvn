@@ -2,6 +2,8 @@ package com.project.chess.ui.binder;
 
 import com.project.chess.data.utils.UserDetails;
 import com.project.chess.ui.form.RegistrationForm;
+import com.project.chess.ui.layout.MainLayout;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -34,19 +36,8 @@ public class RegistrationFormBinder {
        binder.forField(registrationForm.getPassword())
                .withValidator(this::passwordValidator).bind("password");
 
-       // The second password field is not connected to the Binder, but we
-       // want the binder to re-check the password validator when the field
-       // value changes. The easiest way is just to do that manually.
-       registrationForm.getPasswordConfirm().addValueChangeListener(e -> {
-           // The user has modified the second field, now we can validate and show errors.
-           // See passwordValidator() for how this flag is used.
-           enablePasswordValidation = true;
-
-           binder.validate();
-       });
-
        // Set the label where bean-level error messages go
-       binder.setStatusLabel(registrationForm.getErrorMessageField());
+       binder.setStatusLabel(registrationForm.getError());
 
        // And finally the submit button
        registrationForm.getSubmitButton().addClickListener(event -> {
@@ -71,11 +62,9 @@ public class RegistrationFormBinder {
 
    /**
     * Method to validate that:
-    * <p>
     * 1) Password is at least 8 characters long
-    * <p>
-    * 2) Values in both fields match each other
-    */
+    * */
+
    private ValidationResult passwordValidator(String pass1, ValueContext ctx) {
        /*
         * Just a simple length check. A real version should check for password
@@ -92,13 +81,7 @@ public class RegistrationFormBinder {
            return ValidationResult.ok();
        }
 
-       String pass2 = registrationForm.getPasswordConfirm().getValue();
-
-       if (pass1 != null && pass1.equals(pass2)) {
-           return ValidationResult.ok();
-       }
-
-       return ValidationResult.error("Passwords do not match");
+      return ValidationResult.ok();
    }
 
    /**
@@ -109,6 +92,7 @@ public class RegistrationFormBinder {
                Notification.show("Data saved, welcome " + userBean.getFirstName());
        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
-       // Here you'd typically redirect the user to another view
+      // Here you'd typically redirect the user to another view
+      UI.getCurrent().navigate(MainLayout.class);
    }
 }
