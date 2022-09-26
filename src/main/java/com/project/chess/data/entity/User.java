@@ -24,5 +24,7 @@ public class User extends AbstractEntity {
    @Setter(AccessLevel.NONE)
    private String password;
    private String email;
+   private int xCoord;
+   private int yCoord;
    private Role role;
 }
